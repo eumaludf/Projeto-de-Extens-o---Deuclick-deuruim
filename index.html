@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deu Click, Deu Ruim! — Experimento Social (Versão Pública)</title>
+  <style>
+    :root{
+      --bg:#f6fbff;
+      --card:#ffffff;
+      --accent:#2b7be4;
+      --muted:#556677;
+      font-family: Inter, Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,var(--bg),#eef6ff);color:#10233b}
+
+    .container{max-width:900px;margin:40px auto;padding:24px}
+
+    header{display:flex;gap:16px;align-items:center}
+    .logo {
+  font-size: 48px; /* deixa o emoji grande */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+}
+
+    h1{font-size:22px;margin:0}
+    p.lead{color:var(--muted);margin:8px 0 24px}
+
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 24px rgba(16,35,59,0.06)}
+
+    .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.4));backdrop-filter: blur(4px);z-index:20}
+    .overlay-inner{width:min(700px,92%);background:linear-gradient(180deg,#fff,#f3fbff);padding:26px;border-radius:14px;box-shadow:0 8px 36px rgba(2,6,23,0.3);text-align:center}
+    .warning-title{font-size:20px;color:#b32a2a;font-weight:700;margin-bottom:8px}
+    .warning-text{color:#10233b;margin-bottom:16px}
+
+    .drag-area{display:flex;align-items:center;justify-content:center;gap:14px}
+    .hand{width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,#fff,#eef7ff);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(16,35,59,0.08)}
+    .hand:after{content:'\2193';font-size:22px;color:var(--accent);animation:float 1.4s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(8px)}100%{transform:translateY(0)}}
+
+    .cta{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;border:none;font-weight:600;cursor:pointer}
+    .muted-note{color:var(--muted);font-size:13px;margin-top:10px}
+
+    main{margin-top:20px}
+    .info-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .info-grid p{margin:0;color:var(--muted)}
+
+    .ascii{white-space:pre;font-family:monospace;padding:14px;background:linear-gradient(180deg,#fbfdff,#f3f8ff);border-radius:8px;margin-top:18px;color:#0b2540;text-align:center}
+    .participants{margin-top:8px;font-size:14px;color:var(--muted);text-align:center}
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+    @media (min-width:720px){.info-grid{grid-template-columns:1fr 1fr}} 
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+    <div class="overlay-inner">
+      <div class="warning-title" id="overlayTitle">Esse é um experimento social!</div>
+      <div class="warning-text">Você correu muito perigo ao acessar esse QR code.<br>Não se preocupe: este é um teste educativo de conscientização — nenhuma informação pessoal foi coletada.</div>
+
+      <div class="drag-area" aria-hidden="false">
+        <div class="hand" aria-hidden="true"></div>
+        <div style="text-align:left;">
+          <div style="font-weight:700;margin-bottom:6px">Arraste (ou toque) para saber mais</div>
+          <div class="muted-note">Dica: se estiver no celular, arraste para cima ou toque no botão abaixo.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;display:flex;gap:10px;justify-content:center">
+        <button class="cta" id="revealBtn">Quero saber mais</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+  <div class="logo" title="Hacker ético">🧑‍💻</div>
+  <div>
+    <h1>Deu Click, Deu Ruim — Experimento Social (Versão Pública)</h1>
+    <p class="lead">Projeto educativo do BSI (IFSP) criado para conscientizar sobre segurança digital através de QR Codes espalhados pela cidade.</p>
+  </div>
+</header>
+
+
+    <main class="card" id="mainContent" aria-hidden="true">
+      <section class="info-grid">
+        <div>
+          <h3>O que aconteceu?</h3>
+          <p>Você acabou de acessar um QR code de um experimento social! Essa iniciativa avalia como as pessoas reagem ao escanear links desconhecidos, reforçando a importância da cautela online.</p>
+        </div>
+        <div>
+          <h3>Por que isso é importante?</h3>
+          <p>QR codes podem ser usados por golpistas para redirecionar você a sites falsos ou roubar dados. Este projeto busca mostrar como se proteger desses riscos no dia a dia digital.</p>
+        </div>
+      </section>
+
+      <section style="margin-top:20px">
+        <h2>Dicas de Cibersegurança 🛡️</h2>
+        <ul>
+          <li><strong>1. Antes de clicar, pare e olhe:</strong> confira o endereço antes de abrir. Evite links com domínios estranhos ou muitos caracteres aleatórios.</li>
+          <li><strong>2. Verifique sempre o remetente:</strong> e-mails urgentes ou com erros de português são sinais de alerta.</li>
+          <li><strong>3. Não forneça dados pessoais:</strong> nunca envie CPF, senha ou dados bancários em sites duvidosos.</li>
+          <li><strong>4. Ative a autenticação de dois fatores (2FA):</strong> aumenta a segurança mesmo que sua senha seja descoberta.</li>
+          <li><strong>5. Desconfie de QR Codes em locais públicos:</strong> visualize o link antes de abrir e confirme se o endereço é confiável.</li>
+          <li><strong>6. Cuidado com “promoções imperdíveis”:</strong> se parecer bom demais pra ser verdade, provavelmente é golpe.</li>
+          <li><strong>7. Verifique se há o cadeado HTTPS:</strong> nunca digite senhas em sites sem segurança.</li>
+          <li><strong>8. Cuidado com avisos falsos de vírus:</strong> nenhum site legítimo detecta vírus automaticamente.</li>
+        </ul>
+      </section>
+
+      <section style="margin-top:20px">
+        <h2>Quer registrar sua experiência?</h2>
+        <p>Participe do nosso levantamento respondendo um breve formulário sobre esta ação.</p>
+        <p><a href="#" target="_blank">👉 Clique aqui para acessar o formulário</a></p>
+      </section>
+
+      <div class="ascii">
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣼⣯⣧⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡶⠛⠉⠈⣧⠀⠀⠉⠳⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⠓⠶⣄⣸⣽⡆⣀⣤⣴⣞⣻⣿⣷⣶⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡟⢠⠀⠀⠀⠙⠛⠿⠛⠛⠓⣦⣤⠴⠿⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠛⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣨⠞⠁⠘⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⣠⠴⠖⠒⠒⠒⠒⠚⠉⠉⠀⠀⠀⠀⠘⣿⣤⣤⣤⣤⣤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣏⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⡛⡟⠛⠒⠯⠽⣟⣻⢶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡞⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣧⣿⠀⠀⠀⠀⠀⠉⠳⣍⠻⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣯⣤⣤⣄⡀⠀⠀⠀⠙⣧⠙⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⢾⣿⡴⠶⢮⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⠀⠀⠉⠙⠻⢶⣄⠀⣿⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⢛⡽⠞⢹⡄⠀⠀⢸⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠙⢷⣿⠀⣸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣠⡴⠟⣡⠖⠋⠀⠀⢸⠃⠀⢀⣸⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣇⠀⠀⠀⠀⠀⠀⠀⠙⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣠⠶⢋⠴⠋⠁⠀⠀⢀⣠⣼⡴⠖⠋⢹⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+      </div>
+
+      <div class="participants">
+        <strong>Autores:</strong> Breno Cauã Vialle, Maria Luiza Duarte, João Victor Lopes — BSI 2 • IFSP Votuporanga
+      </div>
+    </main>
+
+    <footer>
+      <div>Versão adaptada para circulação pública — Projeto SNCT 2025</div>
+    </footer>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const revealBtn = document.getElementById('revealBtn');
+    const mainContent = document.getElementById('mainContent');
+
+    function reveal(){
+      overlay.style.display = 'none';
+      mainContent.setAttribute('aria-hidden','false');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    revealBtn.addEventListener('click', reveal);
+  </script>
+</body>
+</html>
